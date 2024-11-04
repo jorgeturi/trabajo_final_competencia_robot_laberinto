@@ -5,4 +5,4 @@
   ![imagen robot](laberinto.jpg)
 </p>
 
-<p align="center">Esta es la descripción de mi proyecto.</p>
+<p align="center">Técnicas y Dispositivos Digitales II | Sistemas Embebidos</p>
