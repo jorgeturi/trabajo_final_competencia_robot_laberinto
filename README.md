@@ -1,2 +1,2 @@
 # Trabajo final
-!(laberinto.jpg)
+![imagen robot](laberinto.jpg)
