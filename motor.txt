@@ -1,0 +1,23 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity control_motor is
+    Port ( b1 : in  STD_LOGIC;
+           b2 : in  STD_LOGIC;
+           b3 : in  STD_LOGIC;
+           Y : out STD_LOGIC_VECTOR(6 downto 0) );  -- Salida de 7 bits
+end control_motor;
+
+architecture Behavioral of control_motor is
+begin
+        with (b1 & b2 & b3) select
+            Y <= "0000001" when "000",
+                 "0000010" when "001",
+                 "0000100" when "010",
+                 "0001000" when "011",
+                 "0010000" when "100",
+                 "0100000" when "101",
+                 "1000000" when "110",
+                 "1111111" when "111",
+                 "0000000" when others;  -- Valor por defecto
+end Behavioral;
