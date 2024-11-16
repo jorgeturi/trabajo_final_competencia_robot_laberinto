@@ -20,7 +20,7 @@ architecture Behavioral of Movimiento is
     signal      pwm_counter : integer range 0 to 2499 := 0;  -- Contador para 1 kHz con reloj de 50 MHz
     constant pwm_duty_cycle : integer := 1000; --40%
     signal     mode_counter : integer range 0 to 5;  -- Contador para cambiar el modo 
-    signal             clk2 : std_LOGIC;
+    signal             clk2 : STD_LOGIC;
     signal 	      count : integer range 0 to 49999999;
     signal             modo : STD_LOGIC_VECTOR(2 downto 0);
 
@@ -28,15 +28,21 @@ begin
     	 -- Generación de señales PWM para vmI y vmD
 	 process(clk,reset)
 	 begin
+
 		if reset = '0' then
 			count <= 0;
 			clk2 <= 0;
 		elsif rising_edge(clk) then
-			count <= count + 1;
+
+			if count = 49999999 then
+				clk2 <= not (clk2);
+				count <= 0;
+			end if;
+		count <= count + 1;
 		end if;
+
 	 end process;
 	 
-	 clk2 <= not(clk2) when count = 49999999;
 	 
 
 
