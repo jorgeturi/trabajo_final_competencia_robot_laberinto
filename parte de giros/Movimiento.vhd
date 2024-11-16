@@ -11,24 +11,26 @@ entity Movimiento is
         mD1       : out STD_LOGIC;
         vmI       : out STD_LOGIC;
         vmD       : out STD_LOGIC;
-        modo      : buffer  STD_LOGIC_VECTOR(2 downto 0);  -- Cambiado a 'buffer'
         led       : out STD_LOGIC          -- Señal para controlar el LED
     );
 end Movimiento;
 
 architecture Behavioral of Movimiento is
-    -- Parámetros para el PWM
-    signal    pwm_counter : integer range 0 to 2499 := 0;  -- Contador para 1 kHz con reloj de 50 MHz
-    signal pwm_duty_cycle : integer range 0 to 2499 := 1249;  -- Ciclo de trabajo (50% de 50,000)
-    signal   mode_counter : integer range 0 to 7;  -- Contador para cambiar el modo (3 bits)
-	 signal           clk2 : std_LOGIC;
-	 signal 			  count : integer range 0 to 49999999;
+
+    signal      pwm_counter : integer range 0 to 2499 := 0;  -- Contador para 1 kHz con reloj de 50 MHz
+    constant pwm_duty_cycle : integer := 1000; --40%
+    signal     mode_counter : integer range 0 to 5;  -- Contador para cambiar el modo 
+    signal             clk2 : std_LOGIC;
+    signal 	      count : integer range 0 to 49999999;
+    signal             modo : STD_LOGIC_VECTOR(2 downto 0);
+
 begin
-    -- Generación de señales PWM para vmI y vmD
+    	 -- Generación de señales PWM para vmI y vmD
 	 process(clk,reset)
 	 begin
 		if reset = '0' then
 			count <= 0;
+			clk2 <= 0;
 		elsif rising_edge(clk) then
 			count <= count + 1;
 		end if;
@@ -36,33 +38,35 @@ begin
 	 
 	 clk2 <= not(clk2) when count = 49999999;
 	 
+
+
     process(clk, reset)
     begin
         if reset = '0' then
             pwm_counter <= 0;  -- Resetea el contador cuando se activa el reset
         elsif rising_edge(clk) then
+
             -- Incrementa el contador de PWM en cada flanco de reloj
-            if pwm_counter = 2500 then
-                pwm_counter <= 0;  -- Resetea el contador cuando llega a 2500
+            if pwm_counter = 2499 then
+                pwm_counter <= 0;  -- Resetea el contador
             else
                 pwm_counter <= pwm_counter + 1;  -- Incrementa el contador
             end if;
 
-            -- Generación de la señal PWM para vmI
+            -- Generación de la señal PWM
             if pwm_counter < pwm_duty_cycle then
                 vmI <= '1';  -- Señal encendida
+		vmD <= '1';
             else
                 vmI <= '0';  -- Señal apagada
+		vmD <= '0';
             end if;
 
-            -- Generación de la señal PWM para vmD
-            if pwm_counter < pwm_duty_cycle then
-                vmD <= '1';  -- Señal encendida
-            else
-                vmD <= '0';  -- Señal apagada
-            end if;
         end if;
     end process;
+
+
+
 
     -- Generación de las señales de control del motor basadas en el modo
     process(clk2, reset)
@@ -75,10 +79,9 @@ begin
             mD1 <= '0';
             modo <= "000";  -- Modo por defecto (Parar)
             led <= '1';  -- Enciende el LED cuando se activa el reset
-				mode_counter <= 0;
+	    mode_counter <= 0;
+
         elsif rising_edge(clk2) then
-				led <= '0';
-            -- Cambiar el valor de 'modo' según el contador de modos
             case mode_counter is
                 when 0 =>  -- "000" - Parar
                     modo <= "000";
@@ -108,30 +111,37 @@ begin
                     mI1 <= '0';
                     mD0 <= '0';
                     mD1 <= '0';
+		    led <= '0';
+
                     
                 when "001" =>  -- Avanzar
                     mI0 <= '0';
                     mI1 <= '1';
                     mD0 <= '0';
                     mD1 <= '1';
+		    led <= '1';
+
                     
                 when "010" =>  -- Girar a la derecha
                     mI0 <= '0';
                     mI1 <= '1';
                     mD0 <= '1';
                     mD1 <= '0';
+		    led <= '0';
                     
                 when "011" =>  -- Girar a la izquierda
                     mI0 <= '1';
                     mI1 <= '0';
                     mD0 <= '0';
                     mD1 <= '1';
+	            led <= '1';
                     
                 when "111" =>  -- Retroceder
                     mI0 <= '1';
                     mI1 <= '0';
                     mD0 <= '1';
                     mD1 <= '0';
+		    led <= '0';
                     
                 when others =>  -- Caso por defecto
                     mI0 <= '0';
