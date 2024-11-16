@@ -37,8 +37,9 @@ begin
 			if count = 49999999 then
 				clk2 <= not (clk2);
 				count <= 0;
-			end if;
-		count <= count + 1;
+			else
+            		count <= count + 1;  -- Incrementar el contador solo si no se ha llegado al máximo
+        		end if;
 		end if;
 
 	 end process;
