@@ -1,0 +1,21 @@
+
+State Machine - |TODO|sensorline:inst1|state
+Name state.s3 state.s2 state.s1 state.s0 
+state.s0 0 0 0 0 
+state.s1 0 0 1 1 
+state.s2 0 1 0 1 
+state.s3 1 0 0 1 
+
+State Machine - |TODO|accion:inst2|avance:inst_avance|AvanceFijo:inst1|fstate
+Name fstate.Corrige_Hacia_Izquierda fstate.Corrige_Hacia_Derecha fstate.Avanza_Recto 
+fstate.Avanza_Recto 0 0 0 
+fstate.Corrige_Hacia_Derecha 0 1 1 
+fstate.Corrige_Hacia_Izquierda 1 0 1 
+
+State Machine - |TODO|accion:inst2|avance:inst_avance|adc:inst2|adc_adc_mega_0:adc_mega_0|altera_up_avalon_adv_adc:ADC_CTRL|currState
+Name currState.doneState currState.transState currState.waitState currState.resetState currState.pauseState 
+currState.resetState 0 0 0 0 0 
+currState.waitState 0 0 1 1 0 
+currState.transState 0 1 0 1 0 
+currState.doneState 1 0 0 1 0 
+currState.pauseState 0 0 0 1 1 

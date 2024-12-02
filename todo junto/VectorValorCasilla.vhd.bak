@@ -1,0 +1,19 @@
+library ieee;
+use ieee.STD_logic_1164.all;
+
+entity VectorValorCasilla is
+PORT (
+		
+		
+		);
+
+
+end VectorValorCasilla;
+
+architecture behave of VectorValorCasilla is
+
+begin
+
+
+end behave;
+

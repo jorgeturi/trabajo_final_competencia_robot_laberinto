@@ -1,0 +1,103 @@
+library ieee;
+use ieee. std_logic_1164.all;
+use ieee. std_logic_arith.all;
+use ieee. std_logic_unsigned.all;
+
+
+entity RestadorCompleto is
+
+
+PORT 
+( 	
+	w1: in std_logic;
+	w2: in std_logic;
+	w3: in std_logic;
+	w4: in std_logic;
+	w5: in std_logic;
+	w6: in std_logic;
+	w7: in std_logic;
+	w8: in std_logic;
+	w9: in std_logic;
+	w10: in std_logic;
+	w11: in std_logic;
+	w12: in std_logic;
+	w13: in std_logic;
+	w14: in std_logic;
+	w15: in std_logic;
+	w16: in std_logic;
+	w17: in std_logic;
+	w18: in std_logic;
+	w19: in std_logic;
+	w20: in std_logic;
+	w21: in std_logic;
+	w22: in std_logic;
+	w23: in std_logic;
+	w24: in std_logic;
+	
+	wo1: out std_logic;
+	wo2: out std_logic;
+	wo3: out std_logic;
+	wo4: out std_logic;
+	wo5: out std_logic;
+	wo6: out std_logic;
+	wo7: out std_logic;
+	wo8: out std_logic;
+	wo9: out std_logic;
+	wo10: out std_logic;
+	wo11: out std_logic;
+	wo12: out std_logic;
+	wo13: out std_logic;
+	wo14: out std_logic;
+	wo15: out std_logic;
+	wo16: out std_logic;
+	wo17: out std_logic;
+	wo18: out std_logic;
+	wo19: out std_logic;
+	wo20: out std_logic;
+	wo21: out std_logic;
+	wo22: out std_logic;
+	wo23: out std_logic;
+	wo24: out std_logic;
+	
+	clk: in std_logic;
+	res: out std_logic
+	
+);
+
+end RestadorCompleto;
+
+
+ 
+architecture behave of RestadorCompleto is
+
+ -- CREA VARIABLES PARA FLIP FLOP TIPO D
+	component D_FF
+		PORT 
+		( 	
+			D,CLOCK: in std_logic;
+			Q: out std_logic
+		);
+	end component;
+	
+
+	-- DEFINE SEÑALES INTERNAS
+	signal a, b, bin, bout, res: std_logic;
+
+
+	
+ -- INIT ARCHITECTURE BEHAVEOURAL
+ 
+begin
+	-- DEF COMPORTAMIENTO SEÑALES
+	res <= a xor b xor bin;
+	bout <= ( not a   and  (b or bin) ) or (bin and b);
+	
+	D1: D_FF port map (in_a, clk, a);
+	D2: D_FF port map (in_b, clk, b);
+	D3: D_FF port map (in_bin, clk, bin);
+	D4: D_FF port map (res, clk, o_res);
+	D5: D_FF port map (bout, clk, o_bout);	
+	
+	
+	
+end behave;

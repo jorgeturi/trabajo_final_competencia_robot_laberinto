@@ -1,0 +1,21 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+entity accion is
+
+	port (clk 		: in std_logic;
+			reset 	: in std_logic;
+			ADC_DOUT : in std_logic;
+	
+			M0D 		: out std_logic;
+			M1D 		: out std_logic;
+			M0I 		: out std_logic;
+			M1I 		: out std_logic;
+	
+	
+	)
+	
+	
+	
+end accion;

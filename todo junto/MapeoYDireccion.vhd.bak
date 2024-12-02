@@ -1,0 +1,122 @@
+
+LIBRARY ieee;
+USE ieee.std_logic_1164.all; 
+
+LIBRARY work;
+
+ENTITY MapeoYDesicion IS 
+	port(
+			clk: in std_logic;
+			dir0: out std_logic_vector(1 downto 0);
+			dir1: out std_logic_vector(1 downto 0);
+			dir2: out std_logic_vector(1 downto 0);
+			dir3: out std_logic_vector(1 downto 0);
+			dir4: out std_logic_vector(1 downto 0);
+			dir5: out std_logic_vector(1 downto 0);
+			dir6: out std_logic_vector(1 downto 0);
+			dir7: out std_logic_vector(1 downto 0);
+			dir8: out std_logic_vector(1 downto 0);
+			dir9: out std_logic_vector(1 downto 0);
+			dir10: out std_logic_vector(1 downto 0);
+			dir11: out std_logic_vector(1 downto 0);
+			dir12: out std_logic_vector(1 downto 0);
+			dir13: out std_logic_vector(1 downto 0);
+			dir14: out std_logic_vector(1 downto 0);
+			dir15: out std_logic_vector(1 downto 0);
+			dir16: out std_logic_vector(1 downto 0)
+			
+			
+	);
+
+end MapeoYDesicion;
+
+
+architecture behave of MapeoYDesicion is
+
+
+	component testBlock
+		PORT
+		(
+			clk :  IN  STD_LOGIC;
+			reset :  IN  STD_LOGIC;
+			w3 :  IN  STD_LOGIC;
+			w10 :  IN  STD_LOGIC;
+			w7 :  IN  STD_LOGIC;
+			w0 :  IN  STD_LOGIC;
+			w17 :  IN  STD_LOGIC;
+			w21 :  IN  STD_LOGIC;
+			w1 :  IN  STD_LOGIC;
+			w4 :  IN  STD_LOGIC;
+			w14 :  IN  STD_LOGIC;
+			w11 :  IN  STD_LOGIC;
+			w8 :  IN  STD_LOGIC;
+			w22 :  IN  STD_LOGIC;
+			w18 :  IN  STD_LOGIC;
+			w15 :  IN  STD_LOGIC;
+			w6 :  IN  STD_LOGIC;
+			w2 :  IN  STD_LOGIC;
+			w13 :  IN  STD_LOGIC;
+			w9 :  IN  STD_LOGIC;
+			w20 :  IN  STD_LOGIC;
+			w16 :  IN  STD_LOGIC;
+			w5 :  IN  STD_LOGIC;
+			w12 :  IN  STD_LOGIC;
+			w23 :  IN  STD_LOGIC;
+			w19 :  IN  STD_LOGIC;
+			Error :  OUT  STD_LOGIC;
+			REG0_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG0_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG11_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG11_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG11_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG12_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG12_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG12_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG13_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG13_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG13_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG13_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG14_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG14_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG14_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG15_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG15_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG15_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG15_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG1_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG1_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG1_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG2_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG2_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG3_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG3_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG3_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG4_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG4_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG4_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG5_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG5_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG5_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG5_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG6_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG6_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG6_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG7_E :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG7_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG7_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG7_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG8_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG8_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG9_N :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG9_O :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0);
+			REG9_S :  OUT  STD_LOGIC_VECTOR(3 DOWNTO 0)
+		);
+	END component;
+
+
+begin
+
+
+end behave;
+
+

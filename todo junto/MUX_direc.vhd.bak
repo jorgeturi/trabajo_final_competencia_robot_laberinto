@@ -1,0 +1,31 @@
+library ieee;
+use ieee. std_logic_1164.all;
+
+entity MUX is
+
+port (
+		C0: in std_logic;
+		C1: in std_logic;
+		C2: in std_logic;
+		
+		direc out std_logic_vector [1..0]
+);
+
+end MUX;
+
+
+architecture behave of MUX is
+
+ begin
+	process
+ 
+	if C3 = '1' then
+		direc <= C1 & C3;
+	
+	else
+		direc <= C2 & C3;
+	
+	
+	end process
+ 
+ end behave

@@ -1,0 +1,16 @@
+Fitter Status : Successful - Fri Nov 29 19:00:29 2024
+Quartus Prime Version : 23.1std.1 Build 993 05/14/2024 SC Lite Edition
+Revision Name : AvanceFijo
+Top-level Entity Name : accion
+Family : Cyclone IV E
+Device : EP4CE22F17C6
+Timing Models : Final
+Total logic elements : 1,254 / 22,320 ( 6 % )
+    Total combinational functions : 809 / 22,320 ( 4 % )
+    Dedicated logic registers : 988 / 22,320 ( 4 % )
+Total registers : 988
+Total pins : 15 / 154 ( 10 % )
+Total virtual pins : 0
+Total memory bits : 237,568 / 608,256 ( 39 % )
+Embedded Multiplier 9-bit elements : 0 / 132 ( 0 % )
+Total PLLs : 1 / 4 ( 25 % )

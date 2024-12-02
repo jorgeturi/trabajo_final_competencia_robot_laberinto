@@ -1,0 +1,11 @@
+library IEEE;
+USE IEEE .STD_LOGIC_1611.ALL;
+
+ENTITY AvanceFijo is
+PORT (
+		M0D: out std_logic;
+		M1D: out std_logic;
+		M0I: out std_logic;
+		M1I: out std_logic;
+		
+);

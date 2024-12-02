@@ -1,0 +1,284 @@
+LIBRARY IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+
+entity ubicacion2 is
+
+	port (SD : in std_logic;
+			SI	: in std_logic;
+			SF : in std_logic;
+			SL : in std_logic;
+			
+			E 		 : in std_logic;
+			x 		 : in std_logic_vector (1 downto 0);
+			reset  : in std_logic;
+			
+			posicion_out    : out std_logic_vector (3 downto 0);
+			orientacion_out : out std_logic_vector (1 downto 0));
+	
+
+end ubicacion2;
+
+architecture behave of ubicacion2 is
+
+		signal posicion : std_logic_vector (3 downto 0) := "0000";
+
+	begin 
+	
+	--numeracion de casillas del tablero
+	
+	--				10  14  6  2
+	--				11  15  7  3
+	--				9   13  5  1
+	--				8   12  4  0		
+	
+	--numeracion de movimientos
+	
+	--				giré a la derecha   : 001
+	-- 			gire a la izquierda : 010
+	-- 			avancé 				  : 011
+	--				retrocedí			  : 100
+	
+	
+
+	process (E, reset)
+
+	begin
+	
+		if rising_edge (E) then
+		
+			case posicion is
+			
+				when "0000" =>													--estoy en casilla 0
+			
+					case x is
+				
+						when "10" => posicion <= "0100";				--gire a la izquierda y fui a la casilla 4
+																	
+						when "00" => posicion <= "0001";				--avancé y fui a la casilla 1
+				
+						when others => posicion <= "0000";
+
+					end case;					
+			
+				when "0001" =>													--estoy en casilla 1
+			
+					case x is
+						
+						when "10" => posicion <= "0101";				--gire a la derecha y fui a la casilla 5
+																	
+						when "00" => posicion <= "0011";				--avancé y fui a la casilla 3
+				
+						when "11" => posicion <= "0000";				--retrocedi y fui a la casilla 0
+						
+						when others => posicion <= "0000";
+
+					end case;
+			
+				when "0010" =>													--estoy en casilla 2
+			
+					case x is
+											
+						when "10" => posicion <= "0110";				--gire a la izquierda y fui a la casilla 6
+																					
+						when "11" => posicion <= "0011";				--retrocedi y fui a la casilla 3
+						
+						when others => posicion <= "0000";
+
+					end case;
+
+				when "0011" =>													--estoy en casilla 3
+			
+					case x is
+											
+						when "10" => posicion <= "0111";				--gire a la izquierda y fui a la casilla 7
+																	
+						when "00" => posicion <= "0010";				--avancé y fui a la casilla 2
+				
+						when "11" => posicion <= "0001";				--retrocedi y fui a la casilla 1
+						
+						when others => posicion <= "0000";
+
+					end case;	
+						
+				when "0100" =>													--estoy en casilla 4					
+					
+					case x is
+					
+						when "01" => posicion <= "0000";				--gire a la derecha y fui a la casilla 0
+						
+						when "10" => posicion <= "1100";				--gire a la izquierda y fui a la casilla 12
+																	
+						when "00" => posicion <= "0101";				--avancé y fui a la casilla 5
+										
+						when others => posicion <= "0000";
+
+					end case;		
+			
+				when "0101" =>													--estoy en casilla 5					
+					
+					case x is
+					
+						when "01" => posicion <= "0001";				--gire a la derecha y fui a la casilla 1
+						
+						when "10" => posicion <= "1101";				--gire a la izquierda y fui a la casilla 13
+																	
+						when "00" => posicion <= "0111";				--avancé y fui a la casilla 7
+
+						when "11" => posicion <= "0100";				--retrocedi y fui a la casilla 4						
+						
+						when others => posicion <= "0000";
+
+					end case;
+					
+				when "0110" =>													--estoy en casilla 6					
+					
+					case x is
+					
+						when "01" => posicion <= "0010";				--gire a la derecha y fui a la casilla 2
+						
+						when "10" => posicion <= "1110";				--gire a la izquierda y fui a la casilla 14
+																	
+						when "11" => posicion <= "0111";				--retrocedi y fui a la casilla 7
+										
+						when others => posicion <= "0000";
+
+					end case;
+					
+				when "0111" =>													--estoy en casilla 7					
+					
+					case x is
+					
+						when "01" => posicion <= "0011";				--gire a la derecha y fui a la casilla 3
+						
+						when "10" => posicion <= "1111";				--gire a la izquierda y fui a la casilla 15
+																	
+						when "00" => posicion <= "0110";				--avancé y fui a la casilla 6
+
+						when "11" => posicion <= "0101";				--retrocedi y fui a la casilla 5						
+						
+						when others => posicion <= "0000";
+
+					end case;
+					
+				when "1000" =>													--estoy en casilla 8					
+					
+					case x is
+					
+						when "01" => posicion <= "1100";				--gire a la derecha y fui a la casilla 12
+																							
+						when "00" => posicion <= "1001";				--avancé y fui a la casilla 9
+						
+						when others => posicion <= "0000";
+
+					end case;
+	
+				when "1001" =>													--estoy en casilla 9					
+					
+					case x is
+					
+						when "01" => posicion <= "1101";				--gire a la derecha y fui a la casilla 13
+																							
+						when "00" => posicion <= "1011";				--avancé y fui a la casilla 11
+						
+						when "11" => posicion <= "1000";				--retrocedi y fui a la casilla 8												
+						
+						when others => posicion <= "0000";
+
+					end case;
+	
+				when "1010" =>													--estoy en casilla 10					
+					
+					case x is
+					
+						when "01" => posicion <= "1110";				--gire a la derecha y fui a la casilla 14
+																													
+						when "11" => posicion <= "1011";				--retrocedi y fui a la casilla 11												
+						
+						when others => posicion <= "0000";
+
+					end case;	
+					
+				when "1011" =>													--estoy en casilla 11					
+					
+					case x is
+					
+						when "01" => posicion <= "1111";				--gire a la derecha y fui a la casilla 15
+																													
+						when "00" => posicion <= "1010";				--avancé y fui a la casilla 10
+						
+						when "11" => posicion <= "1001";				--retrocedi y fui a la casilla 9														
+						
+						when others => posicion <= "0000";
+
+					end case;	
+					
+				when "1100" =>													--estoy en casilla 12					
+					
+					case x is
+					
+						when "01" => posicion <= "0100";				--gire a la derecha y fui a la casilla 4
+
+						when "10" => posicion <= "1000";				--gire a la izquierda y fui a la casilla 8
+																													
+						when "00" => posicion <= "1101";				--avancé y fui a la casilla 13
+												
+						when others => posicion <= "0000";
+
+					end case;	
+					
+				when "1101" =>													--estoy en casilla 13					
+					
+					case x is
+					
+						when "01" => posicion <= "0101";				--gire a la derecha y fui a la casilla 5
+						
+						when "10" => posicion <= "1001";				--gire a la izquierda y fui a la casilla 9
+																	
+						when "00" => posicion <= "1111";				--avancé y fui a la casilla 15
+
+						when "11" => posicion <= "1100";				--retrocedi y fui a la casilla 12						
+						
+						when others => posicion <= "0000";
+
+					end case;
+					
+				when "1110" =>													--estoy en casilla 14					
+					
+					case x is
+					
+						when "01" => posicion <= "0110";				--gire a la derecha y fui a la casilla 6
+						
+						when "10" => posicion <= "1010";				--gire a la izquierda y fui a la casilla 10
+																	
+						when "11" => posicion <= "1111";				--retrocedi y fui a la casilla 15
+										
+						when others => posicion <= "0000";
+
+					end case;
+					
+				when "1111" =>													--estoy en casilla 15					
+					
+					case x is
+					
+						when "01" => posicion <= "0111";				--gire a la derecha y fui a la casilla 7
+						
+						when "10" => posicion <= "1011";				--gire a la izquierda y fui a la casilla 11
+																	
+						when "00" => posicion <= "1110";				--avancé y fui a la casilla 14
+
+						when "11" => posicion <= "1101";				--retrocedi y fui a la casilla 13						
+						
+						when others => posicion <= "0000";
+
+					end case;
+
+			end case;
+			
+			posicion_out <= posicion;
+	
+		end if;
+	
+	end process;
+
+end behave;
